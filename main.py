@@ -39,14 +39,17 @@ def check_login(username):
                           "Trusted_Connection=yes;")
      cursor = cnxn.cursor()
      query = "SELECT * FROM users WHERE userName = "
-     while True:
+     found = True
+     while found:
+         username = '''username'''
          tmp_query = query+username
          print(tmp_query)
          cursor.execute(tmp_query)
-         for row in cursor:
-             print(row)
-             break
-     cursor.close()
+         user_data = cursor.fetchone()
+         if user_data != "":
+             found = False
+             return user_data
+
 
 
 
@@ -56,9 +59,18 @@ login()
 choice = int(input("Enter choice: "))
 if choice == 1:
     username = enterbox("Username:")
-    check_login(username)
-    #password = passwordbox("Password:")
-    main_menu()
+    print(check_login(username))
+    i = 0
+    while i < 3:
+        password = passwordbox("Password:")
+        if password in check_login(username):
+            main_menu()
+            break
+        else:
+            print("Please try again")
+            i += 1
+
+
 else:
     print("Goodbye")
     exit()
