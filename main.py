@@ -1,9 +1,9 @@
 import pyodbc
-import getpass
+from easygui import passwordbox
+from easygui import msgbox, enterbox
 import os
 
 #function to print login menu
-
 def  login():
     os.system("cls")
     os.system("color a")
@@ -16,7 +16,7 @@ def  login():
     print("\t==============================================")
 
 
-
+#prints the main menu
 def main_menu():
     os.system("cls")
     print("\t==============================================")
@@ -31,9 +31,33 @@ def main_menu():
     print("\t| x. Exit                                    |")
     print("\t==============================================")
 
+#check login credentials
+def check_login(username):
+     cnxn = pyodbc.connect("Driver={SQL Server Native Client 11.0};"
+                          "Server=DESKTOP-PND5I06\SQLEXPRESS;"
+                          "Database=rapoeli;"
+                          "Trusted_Connection=yes;")
+     cursor = cnxn.cursor()
+     query = "SELECT * FROM users WHERE userName = "
+     while True:
+         tmp_query = query+username
+         print(tmp_query)
+         cursor.execute(tmp_query)
+         for row in cursor:
+             print(row)
+             break
+     cursor.close()
+
+
+
+
+
 login()
 choice = int(input("Enter choice: "))
 if choice == 1:
+    username = enterbox("Username:")
+    check_login(username)
+    #password = passwordbox("Password:")
     main_menu()
 else:
     print("Goodbye")
