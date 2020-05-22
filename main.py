@@ -1,6 +1,5 @@
 import pyodbc
-from easygui import passwordbox
-from easygui import msgbox, enterbox
+from easygui import passwordbox, msgbox, enterbox, multenterbox, multpasswordbox
 import os
 import main_helper as mh
 
@@ -26,10 +25,11 @@ if choice == 1: # if choice = 1, user wil be prompt to enter username, if userna
 
 elif choice == 2:
     run = True
-    username = enterbox("Enter username", "Username ")
     while run:
-        password = passwordbox("Enter password ", "Password")
-        password2 = passwordbox("Enter password again", "Password check")
+        box = multenterbox("Add user", "Add user", ["Username", "Password", "Password"])
+        username = box[0]
+        password = box[1]
+        password2 = box[2]   #will fix this tomorrow
         if password == password2:
             mh.add_user(username, password)
             run = False
