@@ -8,7 +8,7 @@ def  login():
     os.system("color a")
 
     print("\t==============================================")
-    print("\t|            Rapoeli v0.1                    |")
+    print("\t|            Rapoeli v0.3                    |")
     print("\t==============================================")
     print("\t| 1. Login                                   |")
     print("\t| 2. Add user                                |")

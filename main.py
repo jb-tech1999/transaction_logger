@@ -24,19 +24,15 @@ if choice == 1: # if choice = 1, user wil be prompt to enter username, if userna
         login()
 
 elif choice == 2:
-    run = True
-    while run:
-        box = multenterbox("Add user", "Add user", ["Username", "Password", "Password"])
-        username = box[0]
-        password = box[1]
-        password2 = box[2]   #will fix this tomorrow
-        if password == password2:
-            mh.add_user(username, password)
-            run = False
-            mh.main_menu()
-            ask = int(input("Enter choice"))
-        else:
-            print("Password doesn't match")
+    #username = enterbox("Enter username", "Add user")
+    box = multpasswordbox("Enter password", "Enter password", ["Username","Password"])
+    username = box[0]
+    password = box[1]
+    mh.add_user(username, password)
+    run = False
+    mh.main_menu()
+    ask = int(input("Enter choice"))
+
 
 
 
